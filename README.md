@@ -117,18 +117,3 @@ Potential future pipeline:
 Word → PDF → Text Extraction → AI Summary → JSON Output
 
 ---
-
-# 📜 License
-
-MIT License
-
----
-
-# 👨‍💻 Author
-
-Built as a small automation tool and learning project using:
-
-Python  
-Watchdog  
-Windows COM automation  
-Microsoft Word
