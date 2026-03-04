@@ -6,19 +6,19 @@ from converter import convert_to_pdf
 # This helps prevent multiple conversions triggered by rapid filesystem events
 last_converted = {}
 
-"""
-    Filesystem event handler that reacts to Word document changes.
 
-    This handler listens for file creation and modification events
-    and triggers the Word → PDF conversion pipeline.
-    Word often triggers multiple filesystem events when saving
-    a document. This function prevents repeated conversions within a short time window (debounce mechanism).
-"""
 
 class WordHandler(FileSystemEventHandler):
 
     def should_convert(self, path):
+        """
+            Filesystem event handler that reacts to Word document changes.
 
+            This handler listens for file creation and modification events
+            and triggers the Word → PDF conversion pipeline.
+            Word often triggers multiple filesystem events when saving
+            a document. This function prevents repeated conversions within a short time window (debounce mechanism).
+        """
         now = time.time()
         last = last_converted.get(path, 0)
 
@@ -29,9 +29,8 @@ class WordHandler(FileSystemEventHandler):
         return True
 
 
-# Triggered on new file creation
     def on_created(self, event):
-
+        # Triggered on new file creation
         if event.src_path.endswith(".docx") and "~$" not in event.src_path:
 
             if self.should_convert(event.src_path):
@@ -40,9 +39,8 @@ class WordHandler(FileSystemEventHandler):
                 time.sleep(1)
                 convert_to_pdf(event.src_path)
 
-# Triggered on modified files
     def on_modified(self, event):
-
+        # Triggered on modified files
         if event.src_path.endswith(".docx") and "~$" not in event.src_path:
 
             if self.should_convert(event.src_path):

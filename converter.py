@@ -3,13 +3,12 @@ import time
 import pythoncom
 import win32com.client
 
-"""
-    Defining a function for converting a Word (.docx) document to PDF.
-    This function uses Microsoft Word COM automation.
-"""
-
-# Initializing COM for the current thread.
 def convert_to_pdf(docx_path):
+    """
+        Defining a function for converting a Word (.docx) document to PDF.
+        This function uses Microsoft Word COM automation.
+    """
+    # Initializing COM for the current thread.
 
     pythoncom.CoInitialize()
     word = None
